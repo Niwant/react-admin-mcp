@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "react-admin-mcp",
+  "version": "1.0.0",
+  "description": "This repo contains the code for react-admin-mcp",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0",
+    "dotenv": "^16.5.0",
+    "mongodb": "^6.16.0",
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3",
+    "ts-node-dev": "^2.0.0"
+  }
+}
