@@ -1,9 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { registerSchemaTool } from './tools/schemas.js';
-import { registerGenerateTool } from './tools/generate.js';
-import { registerUpdateTool } from './tools/update.js';
-import { registerQueryTool } from './tools/query.js';
+import { registerSchemaAnalyzerTool } from './tools/analyzer/schemaAnalyzer.js';
+import { registerUxDesignerTool } from './tools/designer/uxDesigner.js';
+import { registerGeneratorTool } from './tools/developer/generator.js';
 
 export class MCPServer {
   private server: McpServer;
@@ -22,10 +21,9 @@ export class MCPServer {
   }
 
   private registerTools() {
-    registerSchemaTool(this.server);
-    registerGenerateTool(this.server);
-    registerUpdateTool(this.server);
-    registerQueryTool(this.server);
+    registerSchemaAnalyzerTool(this.server);
+    registerUxDesignerTool(this.server);
+    registerGeneratorTool(this.server);
   }
 
   public async start() {
