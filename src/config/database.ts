@@ -1,7 +1,15 @@
+import { config } from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 import { MongoClient, ReadConcernLevel, ReadPreferenceMode, W } from 'mongodb';
 import path from 'path';
 import os from 'os';
 import argv from 'yargs-parser';
+
+// Load environment variables
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+config({ path: resolve(__dirname, '../../.env') });
 
 export interface DatabaseConnectOptions {
     readConcern: ReadConcernLevel;
@@ -19,7 +27,7 @@ export interface DatabaseConfig {
 }
 
 const defaults: DatabaseConfig = {
-    uri: "mongodb+srv://nsalunke:nsal123@niwant.qaqlo.mongodb.net/?retryWrites=true&w=majority&appName=Niwant",
+    uri: "",
     name: "sample_mflix",
     logPath: getLogPath(),
     connectOptions: {
@@ -43,6 +51,11 @@ const cliArgs = argv(process.argv.slice(2), {
         timeoutMS: Number(process.env.MDB_DB_TIMEOUT_MS) || defaults.connectOptions.timeoutMS,
     }
 });
+
+// Validate required environment variables
+if (!process.env.MDB_DB_URI) {
+    console.warn('⚠️  Warning: MDB_DB_URI not found in environment variables. Using default connection string.');
+}
 
 export const dbConfig: DatabaseConfig = {
     ...defaults,
